@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_ON_REWIND_URL,
+  cache: new InMemoryCache(),
+  headers: {
+    'x-account-key': process.env.REACT_APP_ACCOUNT_ID
+  }
+});
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
