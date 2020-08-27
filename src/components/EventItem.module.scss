@@ -1,22 +1,51 @@
+@import '../scss';
+
 .container {
-  width: 50%;
+  width: 100%;
   padding: 1rem;
+
+  @include md {
+    width: 50%;
+  }
 }
 
 .inner_container {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   height: 100%;
+  background-color: $secondary-background-color;
 }
 
 .name {
-  font-size: 2rem;
+  font-size: 0.5rem;
+
+  @include md {
+    font-size: 0.8rem;
+  }
+
+  @include lg {
+    font-size: 1rem;
+  }
+
+  @include xl {
+    font-size: 2rem;
+  }
 }
 
 .video_img {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
   max-width: 100%;
   height: auto;
+}
+
+.thumbnail_container:hover .video_img {
+  opacity: 0.3;
+  cursor: pointer;
 }
 
 .info_container {
@@ -29,7 +58,18 @@
 
 .list_challenger_container {
   display: flex;
-  font-size: 1.5rem;
+  font-size: 0.5rem;
+  @include md {
+    font-size: 0.7rem;
+  }
+
+  @include lg {
+    font-size: 0.9rem;
+  }
+
+  @include xl {
+    font-size: 1.9rem;
+  }
 }
 
 .challenger_container_0 {
@@ -58,17 +98,41 @@
 }
 
 .challenger_img {
-  max-width: 100px;
+  width: 20px;
+  @include md {
+    width: 40px;
+  }
+
+  @include lg {
+    width: 60px;
+  }
+
+  @include xl {
+    width: 80px;
+  }
   height: auto;
 }
 
 .list_tag_container {
   display: flex;
+  font-size: 0.3rem;
+  @include md {
+    font-size: 0.5rem;
+  }
+
+  @include lg {
+    font-size: 0.7rem;
+  }
+
+  @include xl {
+    font-size: 0.9rem;
+  }
 }
 
 .tag_container {
-  margin-right: 1rem;
-  padding: 1rem;
+  margin-right: 0.2rem;
+  padding: 0.2rem;
+  background-color: #fff;
 }
 
 .tag_vod {

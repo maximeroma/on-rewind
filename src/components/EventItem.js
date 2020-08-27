@@ -1,14 +1,19 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './EventItem.module.scss'
 
-const EventItem = ({ item }) => {
+function EventItem({ item }) {
+  const history = useHistory()
+
+  const goToEvent = () => history.push('/event/' + item.id)
+
   return (
     <div className={styles.container}>
-      <div className={styles.inner_container}>
-        <div>
+      <div onClick={goToEvent} className={styles.inner_container}>
+        <div className={styles.thumbnail_container}>
           <img
             className={styles.video_img}
-            src={item.Video.poster ? item.Video.poster : '/fallback.jpg'}
+            src={item.Video.poster ? item.Video.poster : '/fallback.png'}
           />
         </div>
         <div className={styles.info_container}>
@@ -46,7 +51,7 @@ const EventItem = ({ item }) => {
                     styles['tag_' + tag.name]
                   }`}
                 >
-                  {tag.name}
+                  {tag.name.toUpperCase()}
                 </div>
               )
             })}

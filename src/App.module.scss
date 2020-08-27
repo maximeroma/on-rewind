@@ -1,32 +1,28 @@
-@import './scss/variables.scss';
+@import './scss';
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  min-width: auto;
-  min-height: auto;
-  margin: 0;
+body,
+html {
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 .container {
+  min-height: 100vh;
   background-color: $primary-background-color;
   color: $primary-font-color;
   font-family: 'Poppins', sans-serif;
 }
 
-.list_item {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .header {
   display: flex;
   justify-content: center;
-  width: 100%;
-  font-size: 10rem;
+  font-size: 2rem;
   background: linear-gradient(
     45deg,
     $secondary-background-color,
@@ -34,4 +30,16 @@ body {
     $primary-background-color,
     $primary-background-color
   );
+
+  @include md {
+    font-size: 5rem;
+  }
+
+  @include lg {
+    font-size: 8rem;
+  }
+
+  @include xl {
+    font-size: 10rem;
+  }
 }
