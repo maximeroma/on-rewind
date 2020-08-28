@@ -58,7 +58,15 @@ function EventPage() {
               <div className={styles.stream_name}>{stream.name}</div>
               <div className={styles.stream_box}>
                 {stream.url ? (
-                  <ReactPlayer light controls url={stream.url} />
+                  <div>
+                    <ReactPlayer
+                      width="100%"
+                      height="auto"
+                      light
+                      controls
+                      url={stream.url}
+                    />
+                  </div>
                 ) : (
                   <div>Stream not available</div>
                 )}
