@@ -4,6 +4,7 @@ import { useQuery, gql } from '@apollo/client'
 import styles from './HomePage.module.scss'
 import EventItem from '../components/EventItem'
 import Loader from '../components/Loader'
+import Button from '../components/Button'
 import useScroll from '../hooks/useScroll'
 
 const ALL_EVENTS = gql`
@@ -39,11 +40,12 @@ function HomePage() {
 
   const cursor = useRef(null)
 
-  const { isAtBottom } = useScroll({ isWindow: true })
+  const { isAtBottom, isAtTop, goTop } = useScroll({ isWindow: true })
 
   useEffect(() => {
     if (
       isAtBottom &&
+      data &&
       data.allEvents.cursor.after !== null &&
       data.allEvents.cursor.after !== cursor.current
     ) {
@@ -71,25 +73,22 @@ function HomePage() {
     }
   }, [isAtBottom])
 
-  if (loading) {
-    return (
-      <>
-        <div className={styles.list_item}>
-          {(data ? data.allEvents.items : []).map((item) => {
-            return <EventItem key={item.id} item={item} />
-          })}
-        </div>
-        <Loader />
-      </>
-    )
-  }
-
   return (
-    <div className={styles.list_item}>
-      {data.allEvents.items.map((item) => {
-        return <EventItem key={item.id} item={item} />
-      })}
-    </div>
+    <>
+      <div className={styles.list_item}>
+        {(data ? data.allEvents.items : []).map((item) => {
+          return <EventItem key={item.id} item={item} />
+        })}
+        {!isAtTop && (
+          <div className={styles.btn_container}>
+            <div className={styles.btn_inner_container}>
+              <Button onClick={goTop}>Go to top</Button>
+            </div>
+          </div>
+        )}
+      </div>
+      {loading && <Loader />}
+    </>
   )
 }
 

@@ -13,6 +13,7 @@ function EventItem({ item }) {
         <div className={styles.thumbnail_container}>
           <img
             className={styles.video_img}
+            alt={item.name}
             src={item.Video.poster ? item.Video.poster : '/fallback.png'}
           />
         </div>
@@ -31,6 +32,7 @@ function EventItem({ item }) {
                   <div>
                     <img
                       className={styles.challenger_img}
+                      alt={challenger.name}
                       src={
                         challenger.pictureUrl
                           ? challenger.pictureUrl

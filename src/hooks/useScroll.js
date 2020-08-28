@@ -2,6 +2,8 @@ import { useEffect, useRef, useCallback, useState } from 'react'
 
 function useScroll({ threshold = 450, isWindow = false, smooth = true } = {}) {
   const [isAtBottom, setIsAtBottom] = useState(false)
+  const [isAtTop, setIsAtTop] = useState(true)
+
   const ref = useRef(isWindow ? window : null)
 
   const goTop = useCallback(() => {
@@ -24,8 +26,10 @@ function useScroll({ threshold = 450, isWindow = false, smooth = true } = {}) {
   const handleScroll = useCallback(() => {
     if (ref.current) {
       let isAtBottom
+      let isAtTop
       if (ref.current instanceof Window) {
         const currentScrollTop = window.innerHeight + window.scrollY
+        isAtTop = window.scrollY - threshold < 0
         isAtBottom =
           currentScrollTop >= document.documentElement.offsetHeight - threshold
       } else {
@@ -34,6 +38,7 @@ function useScroll({ threshold = 450, isWindow = false, smooth = true } = {}) {
         isAtBottom = currentScrollTop >= ref.current.scrollHeight - threshold
       }
       setIsAtBottom(isAtBottom)
+      setIsAtTop(isAtTop)
     }
   }, [threshold])
 
@@ -46,7 +51,7 @@ function useScroll({ threshold = 450, isWindow = false, smooth = true } = {}) {
     }
   }, [isWindow, handleScroll])
 
-  return { isAtBottom, handleScroll, goTop, goBottom, ref }
+  return { isAtBottom, isAtTop, handleScroll, goTop, goBottom, ref }
 }
 
 export default useScroll
