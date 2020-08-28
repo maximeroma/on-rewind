@@ -1,0 +1,9 @@
+{
+  "id": "b98814fe-841c-4e2c-aa3c-972d19bac52a",
+  "name": "Corinthians",
+  "challengers": ["Corinthians", "Fluminense"],
+  "tags": [
+    { "name": "soccer", "regexp": "/soccer/i" },
+    { "name": "vod", "regexp": "/vod/i" }
+  ]
+}

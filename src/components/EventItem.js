@@ -9,16 +9,22 @@ function EventItem({ item }) {
 
   return (
     <div className={styles.container}>
-      <div onClick={goToEvent} className={styles.inner_container}>
+      <div
+        data-testid={`event-item-${item.id}`}
+        onClick={goToEvent}
+        className={styles.inner_container}
+      >
         <div className={styles.thumbnail_container}>
           <img
             className={styles.video_img}
-            alt={item.name}
+            alt={`thumbnail-${item.name}`}
             src={item.Video.poster ? item.Video.poster : '/fallback.png'}
           />
         </div>
         <div className={styles.info_container}>
-          <div className={styles.name}>{item.name}</div>
+          <div data-testid="event-name" className={styles.name}>
+            {item.name}
+          </div>
           <div className={styles.list_challenger_container}>
             {item.Challengers.map((challenger, idx) => {
               return (
@@ -26,13 +32,16 @@ function EventItem({ item }) {
                   key={challenger.id}
                   className={styles['challenger_container_' + idx]}
                 >
-                  <div className={styles['challenger_name_' + idx]}>
+                  <div
+                    data-testid={`challenger-name-${challenger.name}`}
+                    className={styles['challenger_name_' + idx]}
+                  >
                     {challenger.name}
                   </div>
                   <div>
                     <img
                       className={styles.challenger_img}
-                      alt={challenger.name}
+                      alt={`challenger-${challenger.name}`}
                       src={
                         challenger.pictureUrl
                           ? challenger.pictureUrl
@@ -49,6 +58,7 @@ function EventItem({ item }) {
               return (
                 <div
                   key={tag.id}
+                  data-testid={`tag-${tag.name}`}
                   className={`${styles.tag_container} ${
                     styles['tag_' + tag.name]
                   }`}
